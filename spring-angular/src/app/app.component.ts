@@ -17,7 +17,9 @@ export class AppComponent {
   // Url to fetch the employee records from the spring application.
   readonly APP_URL = "http://localhost:8082/Springmvcangular";
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) {
+    console.log("Hello..........");
+  }
 
   // Method to fetch all employees from the database table.
   getAllEmployees() {
