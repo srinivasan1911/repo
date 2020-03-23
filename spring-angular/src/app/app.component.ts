@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Employee } from "./interface";
 
 @Component({
   selector: "app-root",
@@ -11,7 +12,7 @@ export class AppComponent {
 
   // Object to save the response returned from the service.
   myresponse: any;
-  employeeDetails: any;
+  employeeDetails: Employee;
 
   // Url to fetch the employee records from the spring application.
   readonly APP_URL = "http://localhost:8082/Springmvcangular";
@@ -30,8 +31,8 @@ export class AppComponent {
     );
   }
 
-  getEmployeeDetails(id) {
-    this._http.get(this.APP_URL + "/getemployee/?id=" + id).subscribe(
+  getEmployeeDetails(id: number) {
+    this._http.get<Employee>(this.APP_URL + "/getemployee/?id=" + id).subscribe(
       data => {
         this.employeeDetails = data;
       },
@@ -41,9 +42,9 @@ export class AppComponent {
     );
   }
 
-  editEmployee(details) {
+  editEmployee(details: Employee) {
     console.log(details);
-    this._http.put(this.APP_URL + "/editemployee", details).subscribe(
+    this._http.put<Employee>(this.APP_URL + "/editemployee", details).subscribe(
       data => {
         this.employeeDetails = data;
       },
